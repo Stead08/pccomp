@@ -1,6 +1,5 @@
 import ComputerComponentCardView from "@/app/components/ComputerComponentCardView";
 import StickyFooter from "@/app/components/StickyFooter";
-import Footer from "@/app/components/Footer";
 
 export default function Home() {
   return (

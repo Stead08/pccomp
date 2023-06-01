@@ -11,11 +11,6 @@ const header = () => {
                 Home
               </Link>
             </li>
-            <li>
-              <Link href="/about">
-                About
-              </Link>
-            </li>
           </ul>
         </nav>
       </header>

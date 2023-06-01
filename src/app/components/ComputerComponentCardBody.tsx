@@ -2,6 +2,7 @@ import {Button, CardBody, Flex, Heading, Input, Select, Stack} from "@chakra-ui/
 import React, {FormEvent, useState} from "react";
 import {useTotal} from "@/app/total_price";
 import {PartsCategory} from "@/app/types/types";
+import {json} from "stream/consumers";
 
 export type RakutenItem = {
   Item: {
@@ -43,7 +44,11 @@ export default function ComputerComponentCardBody({index, category, onRemove}: P
       <CardBody>
         <Stack direction={['column', 'row']} spacing='24px'>
           <Heading size="lg" mb={5}>{`${category?.name}${index !== 0 ? ` ${index + 1}` : ""}`}</Heading>
-          {index !== 0 && <Button onClick={onRemove} colorScheme='red' variant='outline'>削除</Button>}
+          {index !== 0 && <Button onClick={() => {
+            onRemove();
+            const price = selected?.Item.itemPrice;
+            addToTotal(-Number(price));
+          }} colorScheme='red' variant='outline'>削除</Button>}
         </Stack>
 
         <Flex direction="column" align="center">

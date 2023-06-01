@@ -1,22 +1,8 @@
 "use client";
-import React, {FormEvent, useState} from "react";
-import {Button, Heading, Select, Card, Flex, Input, CardBody} from "@chakra-ui/react";
-import {useTotal} from "@/app/total_price";
+import React, {useState} from "react";
+import {Button, Card} from "@chakra-ui/react";
 import {ComputerParts, PartsCategory, PartsCategoryList} from "@/app/types/types";
 import ComputerComponentCardBody from "@/app/components/ComputerComponentCardBody";
-
-export const ComputerPartsTest: ComputerParts[] = [
-  {
-    id: 1,
-    category: PartsCategoryList[0],
-    name: "Ryzen 5 5600X",
-    price: 40000,
-    description: "Ryzen 5 5600Xの説明",
-    image: new URL("https://placehold.jp/150x150.png"),
-    rakuten_url: "https://www.rakuten.co.jp/",
-    release_date: "2020-11-05",
-  },
-];
 
 type Props = {
   category_id: PartsCategory["id"];
