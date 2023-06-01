@@ -1,7 +1,7 @@
 "use client";
 import React, {useState} from "react";
 import {Button, Card} from "@chakra-ui/react";
-import {ComputerParts, PartsCategory, PartsCategoryList} from "@/app/types/types";
+import {PartsCategory, PartsCategoryList} from "@/app/types/types";
 import ComputerComponentCardBody from "@/app/components/ComputerComponentCardBody";
 
 type Props = {

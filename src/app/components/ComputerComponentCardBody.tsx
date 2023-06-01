@@ -2,7 +2,6 @@ import {Button, CardBody, Flex, Heading, Input, Select, Stack} from "@chakra-ui/
 import React, {FormEvent, useState} from "react";
 import {useTotal} from "@/app/total_price";
 import {PartsCategory} from "@/app/types/types";
-import {json} from "stream/consumers";
 
 export type RakutenItem = {
   Item: {
