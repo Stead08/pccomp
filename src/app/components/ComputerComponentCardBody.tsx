@@ -46,7 +46,7 @@ export default function ComputerComponentCardBody({index, category, onRemove}: P
           {index !== 0 && <Button onClick={() => {
             onRemove();
             const price = selected?.Item.itemPrice;
-            addToTotal(-Number(price));
+            price !== undefined ? addToTotal(-Number(price)) : addToTotal(0);
           }} colorScheme='red' variant='outline'>削除</Button>}
         </Stack>
 
