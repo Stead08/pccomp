@@ -24,6 +24,7 @@ export default function ComputerComponentCardBody({index, category, onRemove}: P
   const [parts, setParts] = useState<RakutenItem[]>([]);
   const [selected, setSelected] = useState<RakutenItem>();
   const [keyword, setKeyword] = useState("");
+  const [status, setStatus] = useState<"init" | "idle" | "loading" | "error">("init");
 
   const fetchParts = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -31,9 +32,16 @@ export default function ComputerComponentCardBody({index, category, onRemove}: P
     const rakuten_genre_id = category.rakuten_category_id;
     const query_keyword = keyword !== "" ? `&keyword=${keyword}` : "";
     const ng_keyword = "中古".toString()
+    setStatus("loading");
     const response = await fetch(
         `https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601?format=json${query_keyword}&genreId=${rakuten_genre_id}&NGKeyword=${ng_keyword}&applicationId=1071601269090406266&affiliateId=329b32be.5b0feed5.329b32bf.f5ac8238`
     );
+    if (response.status !== 200) {
+      setStatus("error");
+      console.error(response.body);
+      return;
+    }
+    setStatus("idle");
     const json: RakutenResponse = await response.json();
     setParts(json.Items);
   };
@@ -56,7 +64,7 @@ export default function ComputerComponentCardBody({index, category, onRemove}: P
               <Input placeholder='品番、メーカー、ブランドを検索' value={keyword} onChange={e => setKeyword(e.target.value)}
                      mb={["5", "0"]}
                      flex={1} mr={5}/>
-              <Button type="submit" colorScheme='orange' variant='outline'>
+              <Button type="submit" isLoading={status === "loading"} colorScheme='orange' variant='outline'>
                 検索
               </Button>
             </Flex>
@@ -64,6 +72,7 @@ export default function ComputerComponentCardBody({index, category, onRemove}: P
             <Flex direction={["column", "row"]} justify="space-between">
               <Select
                   placeholder="Select option"
+                  disabled={status !== "idle"}
                   onChange={(event) => {
                     const json: RakutenItem = JSON.parse(event.target.value);
                     setSelected(json);
